@@ -2,3 +2,4 @@ flask==3.0.0
 flask_cors==4.0.0
 pandas==2.1.1
 pymongo==4.6.0
+python-dotenv
