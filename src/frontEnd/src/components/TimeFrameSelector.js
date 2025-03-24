@@ -25,12 +25,12 @@ function TimeFrameSelector({ onTimeFrameChange, informationTitle }) {
 
     // State for start and end dates
     const [startDate, setStartDate] = useState('2018-01-01');
-    const [endDate, setEndDate] = useState(todayFormatted);
+    const [endDate, setEndDate] = useState('2025-01-07');
 
     // Minimum date for start and end dates
     // This controls how far forward and back you can scroll 
     const minDate = '2018-01-01';
-    const maxDate = todayFormatted;
+    const maxDate = '2025-01-07';
 
     /**
      * Handles the change of the start date input.

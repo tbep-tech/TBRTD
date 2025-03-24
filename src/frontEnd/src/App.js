@@ -20,7 +20,7 @@ function MainApp() {
     const Tweet_Filter_Options = ["With Retweets", "Without Retweets"];
 
     const [selectedFilters, setSelectedFilters] = useState({
-        timeFrame: "2018-01-01 2024-08-23",
+        timeFrame: "2018-01-01 2025-01-07",
         accountType: [],
         county: [],
         wordCloud: [],
@@ -97,7 +97,11 @@ function MainApp() {
 
     const FilterDropdown = () => (
         <div className={`filter-dropdown ${isFilterDropdownOpen ? 'open' : ''}`}>
-            <TimeFrameSelector onTimeFrameChange={handleTimeFrameChange} />
+            <TimeFrameSelector
+                startDate={selectedFilters.timeFrame.split(" ")[0]}
+                endDate={selectedFilters.timeFrame.split(" ")[1]}
+                onTimeFrameChange={handleTimeFrameChange}
+            />
             <Filters
                 options={Account_Type_Options}
                 Title={"ACCOUNT TYPE"}

@@ -60,22 +60,23 @@ def get_tweets():
 
     try:
         retweets = request_body[1]['retweets']
-        # Check if timeFrame is a list containing a single string
-        if isinstance(request_body[0]['timeFrame'], list) and len(request_body[0]['timeFrame']) == 1:
-            # Split the single string into start_date and end_date
-            time_frame_str = request_body[0]['timeFrame'][0]
-            time_frame = time_frame_str.split(' ')
-        else:
-            time_frame = request_body[0]['timeFrame']
-        #print(time_frame)
+        tf = request_body[0]['timeFrame']
+        # If timeFrame is provided as a list, extract the single string or join multiple entries.
+        if isinstance(tf, list):
+            if len(tf) == 1:
+                tf = tf[0]
+            else:
+                tf = " ".join(tf)
+        # Always split the timeFrame string into start and end dates.
+        time_frame = tf.split(' ')
         counties = request_body[0]['county']
         account_type_list = request_body[0]['accountType']
     except Exception as e:
         print(e, "Something went wrong with extracting time frame and county")
+        return jsonify({"error": "Invalid request format"}), 400
 
     tweets = analysis.get_filtered_tweets(time_frame, counties, account_type_list, retweets)
     return tweets
-
 
 @app.route('/get_counts', methods=['POST'])
 def get_counts():
