@@ -2,10 +2,13 @@ from datetime import datetime
 from bson import json_util
 import pymongo
 import json
+import os 
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class Analysis:
-    MONGO_URI = "mongodb+srv://Neffati:y4m4SKKmoIg6riCP@cluster0.h1xa7vw.mongodb.net/?retryWrites=true&w=majority"
+    MONGO_URI = os.getenv("MONGO_URI")
     connection = pymongo.MongoClient(MONGO_URI)
 
     def get_filtered_tweets(self, time_frame=None, counties=None, account_type_list=None, retweets=True):
